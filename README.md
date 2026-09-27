@@ -1,6 +1,7 @@
 # Personal site
 
 A personal blog built with Next.js and Nextra.
+Quick note: This fork was all vibecodedly edited, I take no pride in it.
 
 ## Write your home page
 
