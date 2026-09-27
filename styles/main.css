@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.mermaid-diagram {
+  margin: 24px 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mermaid-scroll {
+  overflow-x: auto;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.mermaid-scroll svg {
+  display: block;
+  width: auto;
+  max-width: none !important;
+  margin: 0 auto;
+}
+
 @font-face {
   font-family: 'Inter var';
   font-style: normal;

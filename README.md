@@ -36,13 +36,29 @@ Edit the title, description, and body. Set `date` to the publication date as a q
 
 Keep unfinished posts in a `drafts/` folder outside `pages/`, then move them into `pages/posts/` when ready to publish. This version of Nextra does not hide posts marked `draft: true`.
 
+## Diagrams and MDX
+
+Mermaid diagrams use ordinary fenced blocks. The local remark plugin passes their source to a browser-rendered component, so they also work in the GitHub Pages static export.
+
+````md
+```mermaid
+flowchart LR
+  A[Read an asset] --> B[Decrypt its contents]
+  B --> C[Use the recovered data]
+```
+````
+
+Diagrams follow the light or dark theme and scroll horizontally when wider than the article. JavaScript is required to draw them; the source remains visible while loading or if rendering fails.
+
+Markdown image syntax, such as `![Description](/image.png)`, works in MDX. For comments, use `{/* comment */}` instead of `<!-- comment -->`. Keep code containing literal angle brackets or braces inside fenced code blocks or inline backticks.
+
 ## Run locally
 
 From this directory:
 
 ```sh
-pnpm install
-pnpm dev
+yarn install --frozen-lockfile
+yarn dev
 ```
 
 Open `http://localhost:3000` to preview your changes.
@@ -50,8 +66,8 @@ Open `http://localhost:3000` to preview your changes.
 To build and run the production version:
 
 ```sh
-pnpm build
-pnpm start
+yarn build
+yarn start
 ```
 
 ## GitHub Pages
