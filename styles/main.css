@@ -6,50 +6,209 @@
   font-family: 'Inter var';
   font-style: normal;
   font-weight: 100 900;
-  font-display: block;
+  font-display: swap;
   src: url(/fonts/Inter-roman.latin.var.woff2) format('woff2');
 }
+
 @font-face {
   font-family: 'Inter var';
   font-style: italic;
   font-weight: 100 900;
-  font-display: block;
+  font-display: swap;
   src: url(/fonts/Inter-italic.latin.var.woff2) format('woff2');
-  font-named-instance: 'Italic';
+}
+
+:root {
+  color-scheme: light;
+  --page-bg: #fafaf8;
+  --text: #363b37;
+  --heading: #1c2420;
+  --muted: #646d66;
+  --accent: #286344;
+  --border: #dde2da;
+  --surface: #f0f3ed;
+}
+
+html.dark {
+  color-scheme: dark;
+  --page-bg: #131714;
+  --text: #c9d0c9;
+  --heading: #f0f3ed;
+  --muted: #9da99f;
+  --accent: #acd1b4;
+  --border: #323b33;
+  --surface: #1d251f;
 }
 
 body {
+  background: var(--page-bg);
+  color: var(--text);
   font-family: 'Inter var', system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: subpixel-antialiased;
-  font-feature-settings: 'case' 1, 'cpsp' 1, 'dlig' 1, 'cv01' 1, 'cv02',
-    'cv03' 1, 'cv04' 1;
-  font-variation-settings: 'wght' 450;
-  font-variant: common-ligatures contextual;
-  letter-spacing: -0.02em;
-}
-b,
-strong,
-h3,
-h4,
-h5,
-h6 {
-  font-variation-settings: 'wght' 650;
-}
-h1 {
-  font-variation-settings: 'wght' 850;
-}
-h2 {
-  font-variation-settings: 'wght' 750;
+    'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.015em;
+  padding: 0 24px;
 }
 
-@media screen and (min-device-pixel-ratio: 1.5),
-  screen and (min-resolution: 1.5dppx) {
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+article.nx-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 0 40px;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.8;
+  overflow-wrap: break-word;
+}
+
+article.nx-container > h1 {
+  margin: 0 0 24px;
+  color: var(--heading);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+article.nx-container :is(h2, h3, h4, strong) {
+  color: var(--heading);
+}
+
+article.nx-container > p {
+  margin: 0 0 24px;
+}
+
+article.nx-container a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+article.nx-container a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+  border-radius: 3px;
+}
+
+/* Nextra renders its page navigation directly after the title. */
+article.nx-container > div:has(> .nx-justify-end) {
+  order: -3;
+  margin-bottom: 48px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+article.nx-container > div > .nx-justify-end {
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+article.nx-container > div > .nx-justify-end a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+article.nx-container > div > .nx-justify-end > span {
+  color: var(--heading);
+  font-weight: 650;
+}
+
+article.nx-container [aria-label='Toggle Dark Mode'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  color: var(--muted);
+  border-radius: 50%;
+}
+
+article.nx-container [aria-label='Toggle Dark Mode']:hover {
+  background: var(--surface);
+}
+
+article.nx-container .intro-lead {
+  color: var(--heading);
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+article.nx-container .posts-empty {
+  color: var(--muted);
+}
+
+/* The theme adds post rows automatically as MDX files are published. */
+article.nx-container:has(> .post-item) .posts-empty {
+  display: none;
+}
+
+article.nx-container .post-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  column-gap: 24px;
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+}
+
+article.nx-container .post-item h3 {
+  grid-column: 1;
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+}
+
+article.nx-container .post-item h3 a {
+  color: var(--heading);
+}
+
+article.nx-container .post-item h3 a:hover {
+  color: var(--accent);
+}
+
+article.nx-container .post-item p {
+  grid-column: 1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+article.nx-container .post-item time {
+  grid-column: 2;
+  grid-row: 1;
+  padding-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+article.nx-container .site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+article.nx-container .site-footer p {
+  margin: 0;
 }
 
 details summary {
@@ -60,10 +219,42 @@ img.next-image {
   margin: 0;
 }
 
-.prose a {
-  color: #0074de;
-}
+@media (max-width: 600px) {
+  body {
+    padding: 0 22px;
+  }
 
-.nav-line .nav-link {
-  color: #69778c;
+  article.nx-container {
+    padding-top: 24px;
+    font-size: 16px;
+  }
+
+  article.nx-container > div:has(> .nx-justify-end) {
+    margin-bottom: 36px;
+    padding-bottom: 16px;
+  }
+
+  article.nx-container > div > .nx-justify-end {
+    gap: 18px;
+  }
+
+  article.nx-container .intro-lead {
+    font-size: 18px;
+  }
+
+  article.nx-container .post-item {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 24px 0;
+  }
+
+  article.nx-container .post-item time {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 12px;
+    text-align: left;
+  }
+
+  article.nx-container .site-footer {
+    margin-top: 48px;
+  }
 }
